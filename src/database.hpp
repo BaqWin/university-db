@@ -8,6 +8,7 @@ public:
     void display() const;
     std::string show() const;
     std::string findByName(const std::string& name);
+    std::string findByPesel(const std::string& pesel);
 
 private:
     std::vector<Student> students_;

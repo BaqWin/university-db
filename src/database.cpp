@@ -25,3 +25,12 @@ std::string Database::findByName(const std::string& name){
     }
     return "Nie ma takiego studenta";
 }
+
+std::string Database::findByPesel(const std::string& pesel){
+    for(auto student : students_){
+        if(student.getPesel() == pesel){
+            return student.show();
+        }
+    }
+    return "Nie ma takiego studenta";
+}

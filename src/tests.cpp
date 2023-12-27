@@ -67,3 +67,17 @@ TEST_F(DatabaseTest, CheckStudentByNameFail){
     auto expected = "Nie ma takiego studenta";
     EXPECT_EQ(content, expected);
 }
+
+TEST_F(DatabaseTest, CheckStudentByPeselSuccess){
+    db.add(adam);
+    auto content = db.findByName("Kowalski");
+    auto expected = "Adam Kowalski; ul. Dobra 134, 00-200 Warszawa; 123456; 11223344567; Male";
+    EXPECT_EQ(content, expected);
+}
+
+TEST_F(DatabaseTest, CheckStudentByPeselFail){
+    db.add(adam);
+    auto content = db.findByName("Tracz");
+    auto expected = "Nie ma takiego studenta";
+    EXPECT_EQ(content, expected);
+}
