@@ -16,3 +16,12 @@ std::string Database::show() const{
     }
     return result;
 }
+
+std::string Database::findByName(const std::string& name){
+    for(auto student : students_){
+        if(student.getLastName() == name){
+            return student.show();
+        }
+    }
+    return "Nie ma takiego studenta";
+}
