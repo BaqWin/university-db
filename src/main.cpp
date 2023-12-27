@@ -3,5 +3,24 @@
 #include "database.hpp"
 
 int main(){
-    std::cout << "test" << std::endl;
+    Database db;
+    Student adam{
+        "Adam",
+        "Kowalski",
+        "ul. Dobra 134, 00-200 Warszawa",
+        123456,
+        "11223344567",
+        Gender::Male
+    };
+    Student janusz{
+        "Janusz",
+        "Tracz",
+        "ul. Dobra 134, 00-200 Warszawa",
+        123456,
+        "11223344567",
+        Gender::Male
+    };
+    db.add(adam);
+    db.add(janusz);
+    std::cout << db.show();
 }

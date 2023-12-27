@@ -12,7 +12,7 @@ void Database::display() const {
 std::string Database::show() const{
     std::string result = "";
     for(auto && student : students_){
-        result += student.show();
+        result += student.show() + "\n";
     }
     return result;
 }

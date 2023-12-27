@@ -15,7 +15,7 @@ public:
         int indexNumber,
         std::string pesel,
         Gender gender
-        );
+    );
     std::string show() const;
 
 private:

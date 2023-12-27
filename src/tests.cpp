@@ -20,11 +20,21 @@ TEST_F(DatabaseTest, DisplayNonEmptyDb) {
         123456,
         "11223344567",
         Gender::Male
-      };
+    };
+      Student janusz{
+        "Janusz",
+        "Tracz",
+        "ul. Dobra 134, 00-200 Warszawa",
+        123456,
+        "11223344567",
+        Gender::Male
+    };
     db.add(adam);
+    
+    db.add(janusz);
     //check adding the same person twice
     
     auto content = db.show();
-    auto expected = "Adam Kowalski; ul. Dobra 134, 00-200 Warszawa; 123456; 11223344567; Male";
+    auto expected = "Adam Kowalski; ul. Dobra 134, 00-200 Warszawa; 123456; 11223344567; Male\nJanusz Tracz; ul. Dobra 134, 00-200 Warszawa; 123456; 11223344567; Male\n";
     EXPECT_EQ(content, expected);
 }
