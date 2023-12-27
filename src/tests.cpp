@@ -5,6 +5,16 @@
 struct DatabaseTest : ::testing::Test {
     Database db;
 };
+struct StudentTest : ::testing::Test{
+    Student adam{
+        "Adam",
+        "Kowalski",
+        "ul. Dobra 134, 00-200 Warszawa",
+        123456,
+        "11223344567",
+        Gender::Male
+    };
+};
 
 TEST_F(DatabaseTest, DisplayEmptyDb) {
     auto content = db.show();
@@ -21,7 +31,7 @@ TEST_F(DatabaseTest, DisplayNonEmptyDb) {
         "11223344567",
         Gender::Male
     };
-      Student janusz{
+    Student janusz{
         "Janusz",
         "Tracz",
         "ul. Dobra 134, 00-200 Warszawa",
@@ -36,5 +46,11 @@ TEST_F(DatabaseTest, DisplayNonEmptyDb) {
     
     auto content = db.show();
     auto expected = "Adam Kowalski; ul. Dobra 134, 00-200 Warszawa; 123456; 11223344567; Male\nJanusz Tracz; ul. Dobra 134, 00-200 Warszawa; 123456; 11223344567; Male\n";
+    EXPECT_EQ(content, expected);
+}
+
+TEST_F(StudentTest, CheckGetterFunction){
+    auto content = adam.getLastName();
+    auto expected = "Kowalski";
     EXPECT_EQ(content, expected);
 }
