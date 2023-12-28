@@ -34,3 +34,9 @@ std::string Database::findByPesel(const std::string& pesel){
     }
     return "Nie ma takiego studenta";
 }
+
+void Database::sortByPesel(){
+    sort(students_.begin(), students_.end(), [](const Student& s1, const Student & s2){
+        return (std::stol(s1.getPesel()) < std::stol(s2.getPesel()));
+    });
+}

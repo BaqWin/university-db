@@ -18,7 +18,7 @@ public:
     );
     std::string show() const;
     std::string getLastName();
-    std::string getPesel();
+    std::string getPesel() const;
 
 private:
     std::string name_;

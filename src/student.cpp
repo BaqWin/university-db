@@ -14,6 +14,6 @@ std::string Student::getLastName(){
     return lastName_;
 }
 
-std::string Student::getPesel(){
+std::string Student::getPesel() const{
     return pesel_;
 }
