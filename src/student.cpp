@@ -17,3 +17,7 @@ std::string Student::getLastName(){
 std::string Student::getPesel() const{
     return pesel_;
 }
+
+int Student::getIndexNumber() const{
+    return indexNumber_;
+}

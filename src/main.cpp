@@ -16,14 +16,24 @@ int main(){
         "Janusz",
         "Tracz",
         "ul. Dobra 134, 00-200 Warszawa",
-        123456,
+        123457,
         "11223344565",
+        Gender::Male
+    };
+    Student maciek{
+        "Maciek",
+        "Tkacz",
+        "ul. Dobra 134, 00-200 Warszawa",
+        123458,
+        "11223344566",
         Gender::Male
     };
     db.add(adam);
     db.add(janusz);
+    db.add(maciek);
     std::cout << db.show();
     std::cout << "-------------------------------" << std::endl;
     db.sortByPesel();
+    std::cout << db.removeByIndexNumber(123457) << std::endl;
     std::cout << db.show();
 }

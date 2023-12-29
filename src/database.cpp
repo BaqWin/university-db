@@ -40,3 +40,16 @@ void Database::sortByPesel(){
         return (std::stol(s1.getPesel()) < std::stol(s2.getPesel()));
     });
 }
+
+std::string Database::removeByIndexNumber(const int& indexNumber){
+    auto it = find_if(students_.begin(), students_.end(), [&](const Student& s){
+        return (s.getIndexNumber() == indexNumber);
+    });
+    
+    if(it != students_.end()){
+        students_.erase(it);
+        return "Student deleted!";
+    }else{
+        return "There is no student with this index number";
+    }
+}

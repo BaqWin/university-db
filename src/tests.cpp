@@ -16,8 +16,16 @@ struct DatabaseTest : ::testing::Test {
         "Janusz",
         "Tracz",
         "ul. Dobra 134, 00-200 Warszawa",
-        123456,
+        123457,
         "11223344565",
+        Gender::Male
+    };
+    Student maciek{
+        "Maciek",
+        "Tkacz",
+        "ul. Dobra 134, 00-200 Warszawa",
+        123458,
+        "11223344566",
         Gender::Male
     };
 };
@@ -44,7 +52,7 @@ TEST_F(DatabaseTest, DisplayNonEmptyDb) {
     //check adding the same person twice
     
     auto content = db.show();
-    auto expected = "Adam Kowalski; ul. Dobra 134, 00-200 Warszawa; 123456; 11223344567; Male\nJanusz Tracz; ul. Dobra 134, 00-200 Warszawa; 123456; 11223344565; Male\n";
+    auto expected = "Adam Kowalski; ul. Dobra 134, 00-200 Warszawa; 123456; 11223344567; Male\nJanusz Tracz; ul. Dobra 134, 00-200 Warszawa; 123457; 11223344565; Male\n";
     EXPECT_EQ(content, expected);
 }
 
@@ -87,6 +95,26 @@ TEST_F(DatabaseTest, CheckSortingByPesel){
     db.add(janusz);
     db.sortByPesel();
     auto content = db.show();
-    auto expected = "Janusz Tracz; ul. Dobra 134, 00-200 Warszawa; 123456; 11223344565; Male\nAdam Kowalski; ul. Dobra 134, 00-200 Warszawa; 123456; 11223344567; Male\n";
+    auto expected = "Janusz Tracz; ul. Dobra 134, 00-200 Warszawa; 123457; 11223344565; Male\nAdam Kowalski; ul. Dobra 134, 00-200 Warszawa; 123456; 11223344567; Male\n";
+    EXPECT_EQ(content, expected);
+}
+
+TEST_F(DatabaseTest, CheckDeletingStudent){
+    db.add(adam);
+    db.add(janusz);
+    db.add(maciek);
+    auto content = db.removeByIndexNumber(123457);
+    auto expected = "Student deleted!";
+    EXPECT_EQ(content, expected);
+}
+
+TEST_F(DatabaseTest, CheckDeletingStudentAndSortingByPesel){
+    db.add(adam);
+    db.add(janusz);
+    db.add(maciek);
+    db.sortByPesel();
+    db.removeByIndexNumber(123457);
+    auto content = db.show();
+    auto expected = "Maciek Tkacz; ul. Dobra 134, 00-200 Warszawa; 123458; 11223344566; Male\nAdam Kowalski; ul. Dobra 134, 00-200 Warszawa; 123456; 11223344567; Male\n";
     EXPECT_EQ(content, expected);
 }
