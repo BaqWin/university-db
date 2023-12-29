@@ -118,3 +118,13 @@ TEST_F(DatabaseTest, CheckDeletingStudentAndSortingByPesel){
     auto expected = "Maciek Tkacz; ul. Dobra 134, 00-200 Warszawa; 123458; 11223344566; Male\nAdam Kowalski; ul. Dobra 134, 00-200 Warszawa; 123456; 11223344567; Male\n";
     EXPECT_EQ(content, expected);
 }
+
+TEST_F(DatabaseTest, CheckSortingByLastName){
+    db.add(adam);
+    db.add(janusz);
+    db.add(maciek);
+    db.sortByLastName();
+    auto content = db.show();
+    auto expected = "Adam Kowalski; ul. Dobra 134, 00-200 Warszawa; 123456; 11223344567; Male\nMaciek Tkacz; ul. Dobra 134, 00-200 Warszawa; 123458; 11223344566; Male\nJanusz Tracz; ul. Dobra 134, 00-200 Warszawa; 123457; 11223344565; Male\n";
+    EXPECT_EQ(content, expected);
+}

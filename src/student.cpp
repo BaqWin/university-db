@@ -10,7 +10,7 @@ std::string Student::show() const{
     + pesel_ + "; " + "Male";
 }
 
-std::string Student::getLastName(){
+std::string Student::getLastName() const{
     return lastName_;
 }
 

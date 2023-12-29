@@ -31,6 +31,7 @@ int main(){
     db.add(adam);
     db.add(janusz);
     db.add(maciek);
+    db.sortByLastName();
     std::cout << db.show();
     std::cout << "-------------------------------" << std::endl;
     db.sortByPesel();

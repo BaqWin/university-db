@@ -41,6 +41,12 @@ void Database::sortByPesel(){
     });
 }
 
+void Database::sortByLastName(){
+    sort(students_.begin(), students_.end(), [](const Student& s1, const Student & s2){
+        return (s1.getLastName() < s2.getLastName());
+    });
+}
+
 std::string Database::removeByIndexNumber(const int& indexNumber){
     auto it = find_if(students_.begin(), students_.end(), [&](const Student& s){
         return (s.getIndexNumber() == indexNumber);
