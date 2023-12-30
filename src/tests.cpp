@@ -128,3 +128,31 @@ TEST_F(DatabaseTest, CheckSortingByLastName){
     auto expected = "Adam Kowalski; ul. Dobra 134, 00-200 Warszawa; 123456; 11223344567; Male\nMaciek Tkacz; ul. Dobra 134, 00-200 Warszawa; 123458; 11223344566; Male\nJanusz Tracz; ul. Dobra 134, 00-200 Warszawa; 123457; 11223344565; Male\n";
     EXPECT_EQ(content, expected);
 }
+
+TEST_F(DatabaseTest, CheckPeselValidationTrue){
+    Student lukasz{
+        "Łukasz",
+        "Patrz",
+        "ul. Dobra 134, 00-200 Warszawa",
+        123458,
+        "55030101193",
+        Gender::Male
+    };
+    EXPECT_TRUE(db.peselValidation(lukasz));
+}
+
+TEST_F(DatabaseTest, CheckPeselValidationTrueSecond){
+    Student patryk{
+        "Patryk",
+        "Patrz",
+        "ul. Dobra 134, 00-200 Warszawa",
+        123458,
+        "55030101230",
+        Gender::Male
+    };
+    EXPECT_TRUE(db.peselValidation(patryk));
+}
+
+TEST_F(DatabaseTest, CheckPeselValidationFalse){
+    EXPECT_FALSE(db.peselValidation(maciek));
+}

@@ -21,3 +21,7 @@ std::string Student::getPesel() const{
 int Student::getIndexNumber() const{
     return indexNumber_;
 }
+
+Gender Student::getGender() const{
+    return gender_;
+}

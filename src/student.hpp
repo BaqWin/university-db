@@ -20,6 +20,7 @@ public:
     std::string getLastName() const;
     std::string getPesel() const;
     int getIndexNumber() const;
+    Gender getGender() const;
 
 private:
     std::string name_;

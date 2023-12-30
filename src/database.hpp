@@ -12,7 +12,9 @@ public:
     void sortByPesel();
     void sortByLastName();
     std::string removeByIndexNumber(const int& index);
+    bool peselValidation(const Student& s) const;
 
 private:
     std::vector<Student> students_;
+    bool lastNumberAlgorithm(const std::string& pesel) const;
 };

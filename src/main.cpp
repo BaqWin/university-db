@@ -28,6 +28,14 @@ int main(){
         "11223344566",
         Gender::Male
     };
+    Student lukasz{
+        "Łukasz",
+        "Patrz",
+        "ul. Dobra 134, 00-200 Warszawa",
+        123458,
+        "55030101193",
+        Gender::Male
+    };
     db.add(adam);
     db.add(janusz);
     db.add(maciek);
@@ -37,4 +45,6 @@ int main(){
     db.sortByPesel();
     std::cout << db.removeByIndexNumber(123457) << std::endl;
     std::cout << db.show();
+    std::cout << lukasz.getPesel() << std::endl;
+    db.peselValidation(lukasz);
 }

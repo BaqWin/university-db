@@ -59,3 +59,38 @@ std::string Database::removeByIndexNumber(const int& indexNumber){
         return "There is no student with this index number";
     }
 }
+
+bool Database::peselValidation(const Student& s) const{
+    //TODO Birth Date validation
+    //TODO Check if PESEL has only numbers
+    auto peselString = s.getPesel();
+    if(peselString.length() == 11){
+        if((int(peselString.at(9)) % 2) == 0 && s.getGender() == Gender::Female){
+            return lastNumberAlgorithm(peselString);
+        }else if((int(peselString.at(9)) % 2) != 0 && s.getGender() == Gender::Male){
+            return lastNumberAlgorithm(peselString);
+        }
+    }
+    return false;
+}
+
+bool Database::lastNumberAlgorithm(const std::string& pesel) const{
+    int sum = 0;
+    std::array<int,4> multiplier{1, 3, 7, 9};
+    for(size_t i = 0, j = 0; i < pesel.length() - 1; i++){
+        if(j >= multiplier.size()){
+            j = 0;
+        }
+        sum += int(pesel.at(i) - '0') * multiplier.at(j);
+        j++;
+    }
+    int m = int(std::to_string(sum).back() - '0');
+    int finalChar = int(pesel.back() - '0');
+    if(m == 0 && finalChar == 0){
+        return true;
+    }else if((10 - m) == finalChar){
+        return true;
+    }else{
+        return false;
+    }
+}
