@@ -17,4 +17,5 @@ public:
 private:
     std::vector<Student> students_;
     bool lastNumberAlgorithm(const std::string& pesel) const;
+    bool checkPeselString(const std::string& pesel) const;
 };

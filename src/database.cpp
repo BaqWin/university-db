@@ -62,9 +62,8 @@ std::string Database::removeByIndexNumber(const int& indexNumber){
 
 bool Database::peselValidation(const Student& s) const{
     //TODO Birth Date validation
-    //TODO Check if PESEL has only numbers
     auto peselString = s.getPesel();
-    if(peselString.length() == 11){
+    if(peselString.length() == 11 && checkPeselString(peselString)){
         if((int(peselString.at(9)) % 2) == 0 && s.getGender() == Gender::Female){
             return lastNumberAlgorithm(peselString);
         }else if((int(peselString.at(9)) % 2) != 0 && s.getGender() == Gender::Male){
@@ -93,4 +92,15 @@ bool Database::lastNumberAlgorithm(const std::string& pesel) const{
     }else{
         return false;
     }
+}
+
+bool Database::checkPeselString(const std::string& pesel) const{
+    int tmp = -1;
+    for(auto c : pesel){
+        tmp = int(c - '0');
+        if(tmp > 9 || tmp < 0){
+            return false;
+        }
+    }
+    return true;
 }

@@ -156,3 +156,15 @@ TEST_F(DatabaseTest, CheckPeselValidationTrueSecond){
 TEST_F(DatabaseTest, CheckPeselValidationFalse){
     EXPECT_FALSE(db.peselValidation(maciek));
 }
+
+TEST_F(DatabaseTest, CheckPeselValidationWrongPeselString){
+    Student patryk{
+        "Patryk",
+        "Patrz",
+        "ul. Dobra 134, 00-200 Warszawa",
+        123458,
+        "5503a101230",
+        Gender::Male
+    };
+    EXPECT_FALSE(db.peselValidation(patryk));
+}
