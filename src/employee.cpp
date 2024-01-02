@@ -7,7 +7,8 @@ Employee::Employee(std::string name, std::string lastName, std::string address,
 Employee::~Employee(){}
 
 std::string Employee::show() const{
-    return " ";
+    return name_ + " " + lastName_ + "; " + address_ + "; " 
+    + pesel_ + "; " + "Male" + "; " + std::to_string(salary_);
 };
 std::string Employee::getLastName() const{
     return lastName_;

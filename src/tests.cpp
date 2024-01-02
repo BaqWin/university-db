@@ -2,6 +2,7 @@
 #include "database.hpp"
 #include "person.hpp"
 #include "student.hpp"
+#include "employee.hpp"
 
 struct DatabaseTest : ::testing::Test {
     Database db;
@@ -38,6 +39,17 @@ struct StudentTest : ::testing::Test{
         123456,
         "11223344567",
         Gender::Male
+    };
+};
+
+struct EmployeeTest : ::testing::Test{
+    Employee marcin{
+        "Marcin",
+        "Tracz",
+        "ul. Dobra 134, 00-200 Warszawa",
+        "11223344567",
+        Gender::Male,
+        7000
     };
 };
 
@@ -168,4 +180,10 @@ TEST_F(DatabaseTest, CheckPeselValidationWrongPeselString){
         Gender::Male
     };
     EXPECT_FALSE(db.peselValidation(patryk));
+}
+
+TEST_F(EmployeeTest, CheckEmployeeInitialization){
+    auto content = marcin.show();
+    auto expected = "Marcin Tracz; ul. Dobra 134, 00-200 Warszawa; 11223344567; Male; 7000";
+    EXPECT_EQ(content, expected);
 }
