@@ -1,12 +1,8 @@
 #pragma once
 #include <string>
+#include "person.hpp"
 
-enum class Gender {
-    Male,
-    Female
-};
-
-class Student {
+class Student : public Person{
 public:
     Student(
         std::string name,
@@ -16,17 +12,14 @@ public:
         std::string pesel,
         Gender gender
     );
-    std::string show() const;
-    std::string getLastName() const;
-    std::string getPesel() const;
+    std::string show() const override;
+    std::string getLastName() const override;
+    std::string getPesel() const override;
     int getIndexNumber() const;
-    Gender getGender() const;
+    Gender getGender() const override;
+    ~Student() override;
 
 private:
-    std::string name_;
-    std::string lastName_;
-    std::string address_;
+    using Person::Person;
     int indexNumber_;
-    std::string pesel_;
-    Gender gender_;
 };

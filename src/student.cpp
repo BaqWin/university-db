@@ -1,9 +1,8 @@
 #include "student.hpp"
 
 Student::Student(std::string name, std::string lastName, std::string address, 
-    int indexNumber, std::string pesel, Gender gender) : name_(name), lastName_(lastName),
-    address_(address), indexNumber_(indexNumber), pesel_(pesel), gender_(gender){
-}
+    int indexNumber, std::string pesel, Gender gender) 
+    :Person(name, lastName, address, pesel, gender), indexNumber_(indexNumber){}
 
 std::string Student::show() const{
     return name_ + " " + lastName_ + "; " + address_ + "; " + std::to_string(indexNumber_) + "; " 
@@ -25,3 +24,5 @@ int Student::getIndexNumber() const{
 Gender Student::getGender() const{
     return gender_;
 }
+
+Student::~Student(){}

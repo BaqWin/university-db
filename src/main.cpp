@@ -1,4 +1,5 @@
 #include <iostream>
+#include "person.hpp"
 #include "student.hpp"
 #include "database.hpp"
 

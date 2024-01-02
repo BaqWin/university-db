@@ -3,7 +3,7 @@ project(student-database)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(SOURCES src/database.cpp src/student.cpp)
+set(SOURCES src/database.cpp src/student.cpp src/person.cpp src/employee.cpp)
 set(FLAGS -Wall -Wextra -Wpedantic -std=c++2a)
 
 include(FetchContent)
