@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <map>
 
 enum class Gender {
     Male,
@@ -20,6 +21,7 @@ public:
     virtual std::string getPesel() const = 0;
     virtual Gender getGender() const = 0;
     virtual ~Person();
+    std::string getGenderString() const;
 
 protected:
     std::string name_;
@@ -27,4 +29,6 @@ protected:
     std::string address_;
     std::string pesel_;
     Gender gender_;
+private:
+    static const std::map<Gender, std::string> genderMap;
 };

@@ -6,7 +6,7 @@ Student::Student(std::string name, std::string lastName, std::string address,
 
 std::string Student::show() const{
     return name_ + " " + lastName_ + "; " + address_ + "; " + std::to_string(indexNumber_) + "; " 
-    + pesel_ + "; " + "Male";
+    + pesel_ + "; " + getGenderString();
 }
 
 std::string Student::getLastName() const{

@@ -1,5 +1,7 @@
 #include "database.hpp"
 #include <iostream>
+#include <array>
+#include <algorithm>
 
 void Database::add(const Student& s) {
     students_.push_back(s);
@@ -36,19 +38,19 @@ std::string Database::findByPesel(const std::string& pesel){
 }
 
 void Database::sortByPesel(){
-    sort(students_.begin(), students_.end(), [](const Student& s1, const Student & s2){
+    std::sort(students_.begin(), students_.end(), [](const Student& s1, const Student & s2){
         return (std::stol(s1.getPesel()) < std::stol(s2.getPesel()));
     });
 }
 
 void Database::sortByLastName(){
-    sort(students_.begin(), students_.end(), [](const Student& s1, const Student & s2){
+    std::sort(students_.begin(), students_.end(), [](const Student& s1, const Student & s2){
         return (s1.getLastName() < s2.getLastName());
     });
 }
 
 std::string Database::removeByIndexNumber(const int& indexNumber){
-    auto it = find_if(students_.begin(), students_.end(), [&](const Student& s){
+    auto it = std::find_if(students_.begin(), students_.end(), [&](const Student& s){
         return (s.getIndexNumber() == indexNumber);
     });
     

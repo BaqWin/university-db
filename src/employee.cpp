@@ -8,7 +8,7 @@ Employee::~Employee(){}
 
 std::string Employee::show() const{
     return name_ + " " + lastName_ + "; " + address_ + "; " 
-    + pesel_ + "; " + "Male" + "; " + std::to_string(salary_);
+    + pesel_ + "; " + getGenderString() + "; " + std::to_string(salary_);
 };
 std::string Employee::getLastName() const{
     return lastName_;

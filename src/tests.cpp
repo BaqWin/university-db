@@ -187,3 +187,17 @@ TEST_F(EmployeeTest, CheckEmployeeInitialization){
     auto expected = "Marcin Tracz; ul. Dobra 134, 00-200 Warszawa; 11223344567; Male; 7000";
     EXPECT_EQ(content, expected);
 }
+
+TEST_F(EmployeeTest, CheckEmployeeGender){
+    Employee aleksandra{
+        "Aleksandra",
+        "Daniel",
+        "ul. Dobra 134, 00-200 Warszawa",
+        "11223344567",
+        Gender::Female,
+        7000
+    };
+    auto content = aleksandra.show();
+    auto expected = "Aleksandra Daniel; ul. Dobra 134, 00-200 Warszawa; 11223344567; Female; 7000";
+    EXPECT_EQ(content, expected);
+}
