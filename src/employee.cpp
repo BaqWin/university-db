@@ -19,3 +19,7 @@ std::string Employee::getPesel() const{
 Gender Employee::getGender() const{
     return gender_;
 };
+
+int Employee::getSalary() const{
+    return salary_;
+}

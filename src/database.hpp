@@ -15,6 +15,7 @@ public:
     void sortByLastName();
     std::string removeByIndexNumber(const int& index);
     bool peselValidation(const std::shared_ptr<Person>& ptr) const;
+    void sortBySalary();
 
 private:
     std::vector<std::shared_ptr<Person>> students_;

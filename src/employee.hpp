@@ -17,6 +17,7 @@ public:
     std::string getLastName() const override;
     std::string getPesel() const override;
     Gender getGender() const override;
+    int getSalary() const;
 private:
     int salary_;
 };

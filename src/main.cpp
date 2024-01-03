@@ -46,6 +46,14 @@ int main(){
         Gender::Male,
         7000
     );
+    std::shared_ptr<Employee> aleksandra = std::make_shared<Employee>(
+        "Aleksandra",
+        "Daniel",
+        "ul. Dobra 134, 00-200 Warszawa",
+        "55030101231",
+        Gender::Female,
+        8500
+    );
     db.add(ptr1);
     db.add(ptr1);
     db.add(ptr2);
@@ -63,8 +71,12 @@ int main(){
     db.sortByLastName();
     db.display();
     std::cout << "--------------------------------------------------------------\n";
-    //auto ptr5 = std::dynamic_pointer_cast<Student>(ptr1);
     std::cout << ptr1->getIndexNumber() << std::endl;
     std::cout << db.removeByIndexNumber(ptr1->getIndexNumber()) << std::endl;
     db.display();
+    std::cout << "--------------------------------------------------------------\n";
+    db.add(aleksandra);
+    db.sortBySalary();
+    db.display();
+    //TODO Birth Date validation
 }

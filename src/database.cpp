@@ -82,6 +82,17 @@ bool Database::peselValidation(const std::shared_ptr<Person>& ptr) const{
     return false;
 }
 
+void Database::sortBySalary(){
+    std::sort(students_.begin(), students_.end(), [](const auto& s1, const auto & s2){
+        auto ptr1 = std::dynamic_pointer_cast<Employee>(s1);
+        auto ptr2 = std::dynamic_pointer_cast<Employee>(s2);
+        if(ptr1 != NULL && ptr2 != NULL){
+            return (ptr1->getSalary() < ptr2->getSalary());
+        }
+        return true;
+    });
+}
+
 bool Database::lastNumberAlgorithm(const std::string& pesel) const{
     int sum = 0;
     std::array<int,4> multiplier{1, 3, 7, 9};
