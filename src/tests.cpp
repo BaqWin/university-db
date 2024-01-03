@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include <memory>
 #include "database.hpp"
 #include "person.hpp"
 #include "student.hpp"
@@ -6,51 +7,67 @@
 
 struct DatabaseTest : ::testing::Test {
     Database db;
-    Student adam{
+    std::shared_ptr<Student> adam = std::make_shared<Student>(
         "Adam",
         "Kowalski",
         "ul. Dobra 134, 00-200 Warszawa",
         123456,
         "11223344567",
         Gender::Male
-    };
-    Student janusz{
+    );
+    std::shared_ptr<Student> janusz = std::make_shared<Student>(
         "Janusz",
         "Tracz",
         "ul. Dobra 134, 00-200 Warszawa",
         123457,
         "11223344565",
         Gender::Male
-    };
-    Student maciek{
+    );
+    std::shared_ptr<Student> maciek = std::make_shared<Student>(
         "Maciek",
         "Tkacz",
         "ul. Dobra 134, 00-200 Warszawa",
         123458,
         "11223344566",
         Gender::Male
-    };
+    );
+    std::shared_ptr<Student> lukasz = std::make_shared<Student>(
+        "Łukasz",
+        "Patrz",
+        "ul. Dobra 134, 00-200 Warszawa",
+        123459,
+        "55030101193",
+        Gender::Male
+    );
+    std::shared_ptr<Employee> aleksandra = std::make_shared<Employee>(
+        "Aleksandra",
+        "Daniel",
+        "ul. Dobra 134, 00-200 Warszawa",
+        "11223344567",
+        Gender::Female,
+        7000
+    );
 };
 struct StudentTest : ::testing::Test{
-    Student adam{
+    std::shared_ptr<Student> adam = std::make_shared<Student>(
         "Adam",
         "Kowalski",
         "ul. Dobra 134, 00-200 Warszawa",
         123456,
         "11223344567",
         Gender::Male
-    };
+    );
 };
 
 struct EmployeeTest : ::testing::Test{
-    Employee marcin{
+    std::shared_ptr<Employee> marcin = std::make_shared<Employee>(
         "Marcin",
         "Tracz",
         "ul. Dobra 134, 00-200 Warszawa",
         "11223344567",
         Gender::Male,
         7000
-    };
+    );
 };
 
 TEST_F(DatabaseTest, DisplayEmptyDb) {
@@ -62,15 +79,17 @@ TEST_F(DatabaseTest, DisplayEmptyDb) {
 TEST_F(DatabaseTest, DisplayNonEmptyDb) {
     db.add(adam);
     db.add(janusz);
+    db.add(aleksandra);
+    db.add(aleksandra);
     //check adding the same person twice
     
     auto content = db.show();
-    auto expected = "Adam Kowalski; ul. Dobra 134, 00-200 Warszawa; 123456; 11223344567; Male\nJanusz Tracz; ul. Dobra 134, 00-200 Warszawa; 123457; 11223344565; Male\n";
+    auto expected = "Adam Kowalski; ul. Dobra 134, 00-200 Warszawa; 123456; 11223344567; Male\nJanusz Tracz; ul. Dobra 134, 00-200 Warszawa; 123457; 11223344565; Male\nAleksandra Daniel; ul. Dobra 134, 00-200 Warszawa; 11223344567; Female; 7000\n";
     EXPECT_EQ(content, expected);
 }
 
 TEST_F(StudentTest, CheckGetterFunction){
-    auto content = adam.getLastName();
+    auto content = adam->getLastName();
     auto expected = "Kowalski";
     EXPECT_EQ(content, expected);
 }
@@ -143,26 +162,26 @@ TEST_F(DatabaseTest, CheckSortingByLastName){
 }
 
 TEST_F(DatabaseTest, CheckPeselValidationTrue){
-    Student lukasz{
+    std::shared_ptr<Student> lukasz = std::make_shared<Student>(
         "Łukasz",
         "Patrz",
         "ul. Dobra 134, 00-200 Warszawa",
         123458,
         "55030101193",
         Gender::Male
-    };
+    );
     EXPECT_TRUE(db.peselValidation(lukasz));
 }
 
 TEST_F(DatabaseTest, CheckPeselValidationTrueSecond){
-    Student patryk{
+    std::shared_ptr<Student> patryk = std::make_shared<Student>(
         "Patryk",
         "Patrz",
         "ul. Dobra 134, 00-200 Warszawa",
         123458,
         "55030101230",
         Gender::Male
-    };
+    );
     EXPECT_TRUE(db.peselValidation(patryk));
 }
 
@@ -171,19 +190,19 @@ TEST_F(DatabaseTest, CheckPeselValidationFalse){
 }
 
 TEST_F(DatabaseTest, CheckPeselValidationWrongPeselString){
-    Student patryk{
+    std::shared_ptr<Student> patryk = std::make_shared<Student>(
         "Patryk",
         "Patrz",
         "ul. Dobra 134, 00-200 Warszawa",
         123458,
         "5503a101230",
         Gender::Male
-    };
+    );
     EXPECT_FALSE(db.peselValidation(patryk));
 }
 
 TEST_F(EmployeeTest, CheckEmployeeInitialization){
-    auto content = marcin.show();
+    auto content = marcin->show();
     auto expected = "Marcin Tracz; ul. Dobra 134, 00-200 Warszawa; 11223344567; Male; 7000";
     EXPECT_EQ(content, expected);
 }
