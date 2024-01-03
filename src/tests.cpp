@@ -45,7 +45,7 @@ struct DatabaseTest : ::testing::Test {
         "ul. Dobra 134, 00-200 Warszawa",
         "55030101231",
         Gender::Female,
-        7000
+        8500
     );
 };
 struct StudentTest : ::testing::Test{
@@ -83,7 +83,7 @@ TEST_F(DatabaseTest, DisplayNonEmptyDb) {
     db.add(aleksandra);
     
     auto content = db.show();
-    auto expected = "Adam Kowalski; ul. Dobra 134, 00-200 Warszawa; 123456; 11223344567; Male\nJanusz Tracz; ul. Dobra 134, 00-200 Warszawa; 123457; 11223344565; Male\nAleksandra Daniel; ul. Dobra 134, 00-200 Warszawa; 55030101231; Female; 7000\n";
+    auto expected = "Adam Kowalski; ul. Dobra 134, 00-200 Warszawa; 123456; 11223344567; Male\nJanusz Tracz; ul. Dobra 134, 00-200 Warszawa; 123457; 11223344565; Male\nAleksandra Daniel; ul. Dobra 134, 00-200 Warszawa; 55030101231; Female; 8500\n";
     EXPECT_EQ(content, expected);
 }
 
@@ -217,5 +217,26 @@ TEST_F(EmployeeTest, CheckEmployeeGender){
     };
     auto content = aleksandra.show();
     auto expected = "Aleksandra Daniel; ul. Dobra 134, 00-200 Warszawa; 11223344567; Female; 7000";
+    EXPECT_EQ(content, expected);
+}
+
+TEST_F(DatabaseTest, CheckSortingBySalary){
+    std::shared_ptr<Employee> marcin = std::make_shared<Employee>(
+        "Marcin",
+        "Tracz",
+        "ul. Dobra 134, 00-200 Warszawa",
+        "11223344590",
+        Gender::Male,
+        7000
+    );
+    db.add(adam);
+    db.add(janusz);
+    db.add(aleksandra);
+    db.add(marcin);
+    
+    db.sortBySalary();
+    db.display();
+    auto content = db.show();
+    auto expected = "Marcin Tracz; ul. Dobra 134, 00-200 Warszawa; 11223344590; Male; 7000\nAleksandra Daniel; ul. Dobra 134, 00-200 Warszawa; 55030101231; Female; 8500\nJanusz Tracz; ul. Dobra 134, 00-200 Warszawa; 123457; 11223344565; Male\nAdam Kowalski; ul. Dobra 134, 00-200 Warszawa; 123456; 11223344567; Male\n";
     EXPECT_EQ(content, expected);
 }
