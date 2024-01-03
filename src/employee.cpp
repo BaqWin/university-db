@@ -23,3 +23,7 @@ Gender Employee::getGender() const{
 int Employee::getSalary() const{
     return salary_;
 }
+
+void Employee::setSalary(const int& salary){
+    salary_ = salary;
+}

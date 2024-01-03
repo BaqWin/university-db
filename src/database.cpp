@@ -34,13 +34,13 @@ std::string Database::findByName(const std::string& name){
     return "Nie ma takiego studenta";
 }
 
-std::string Database::findByPesel(const std::string& pesel){
+std::shared_ptr<Person> Database::findByPesel(const std::string& pesel){
     for(auto ptr : students_){
         if(ptr->getPesel() == pesel){
-            return ptr->show();
+            return ptr;
         }
     }
-    return "Nie ma takiego studenta";
+    //Throw exception
 }
 
 void Database::sortByPesel(){
@@ -92,6 +92,14 @@ void Database::sortBySalary(){
         return true;
     });
 }
+
+void Database::findByPeselAndChangeSalary(const std::string& pesel, const int& salary){
+    auto ptr = std::dynamic_pointer_cast<Employee>(findByPesel(pesel));
+    if(ptr != NULL){
+        ptr->setSalary(salary);
+    }
+}
+
 
 bool Database::lastNumberAlgorithm(const std::string& pesel) const{
     int sum = 0;

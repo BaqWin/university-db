@@ -18,6 +18,7 @@ public:
     std::string getPesel() const override;
     Gender getGender() const override;
     int getSalary() const;
+    void setSalary(const int& salary);
 private:
     int salary_;
 };

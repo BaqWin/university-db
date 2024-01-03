@@ -10,12 +10,13 @@ public:
     void display() const;
     std::string show() const;
     std::string findByName(const std::string& name);
-    std::string findByPesel(const std::string& pesel);
+    std::shared_ptr<Person> findByPesel(const std::string& pesel);
     void sortByPesel();
     void sortByLastName();
     std::string removeByIndexNumber(const int& index);
     bool peselValidation(const std::shared_ptr<Person>& ptr) const;
     void sortBySalary();
+    void findByPeselAndChangeSalary(const std::string& pesel, const int& salary);
 
 private:
     std::vector<std::shared_ptr<Person>> students_;
