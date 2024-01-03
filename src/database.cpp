@@ -97,6 +97,9 @@ void Database::findByPeselAndChangeSalary(const std::string& pesel, const int& s
     auto ptr = std::dynamic_pointer_cast<Employee>(findByPesel(pesel));
     if(ptr != NULL){
         ptr->setSalary(salary);
+        std::cout << "Salary changed!\n";
+    }else{
+        std::cout << "Person not found\n";
     }
 }
 

@@ -240,3 +240,30 @@ TEST_F(DatabaseTest, CheckSortingBySalary){
     auto expected = "Marcin Tracz; ul. Dobra 134, 00-200 Warszawa; 11223344590; Male; 7000\nAleksandra Daniel; ul. Dobra 134, 00-200 Warszawa; 55030101231; Female; 8500\nJanusz Tracz; ul. Dobra 134, 00-200 Warszawa; 123457; 11223344565; Male\nAdam Kowalski; ul. Dobra 134, 00-200 Warszawa; 123456; 11223344567; Male\n";
     EXPECT_EQ(content, expected);
 }
+
+TEST_F(DatabaseTest, CheckFindingAndModifyingSalary){
+    std::shared_ptr<Employee> marcin = std::make_shared<Employee>(
+        "Marcin",
+        "Tracz",
+        "ul. Dobra 134, 00-200 Warszawa",
+        "11223344590",
+        Gender::Male,
+        7000
+    );
+    db.add(marcin);
+    
+    db.findByPeselAndChangeSalary(marcin->getPesel(), 8500);
+    auto content = marcin->show();
+    auto expected = "Marcin Tracz; ul. Dobra 134, 00-200 Warszawa; 11223344590; Male; 8500";
+    EXPECT_EQ(content, expected);
+}
+
+TEST_F(DatabaseTest, CheckFindingAndModifyingSalaryFail){
+    db.add(adam);
+    db.add(lukasz);
+    
+    db.findByPeselAndChangeSalary(adam->getPesel(), 9000);
+    auto content = db.show();
+    auto expected = "Adam Kowalski; ul. Dobra 134, 00-200 Warszawa; 123456; 11223344567; Male\nŁukasz Patrz; ul. Dobra 134, 00-200 Warszawa; 123459; 55030101193; Male\n";
+    EXPECT_EQ(content, expected);
+}
