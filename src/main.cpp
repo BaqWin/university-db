@@ -42,10 +42,11 @@ int main(){
         "Marcin",
         "Tracz",
         "ul. Dobra 134, 00-200 Warszawa",
-        "11223344567",
+        "11223344570",
         Gender::Male,
         7000
     );
+    db.add(ptr1);
     db.add(ptr1);
     db.add(ptr2);
     db.add(ptr3);

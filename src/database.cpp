@@ -4,7 +4,12 @@
 #include <algorithm>
 
 void Database::add(const std::shared_ptr<Person>& ptr) {
-    //TODO adding the same person twice
+    for(auto x : students_){
+        if(x->getPesel() == ptr->getPesel()){
+            std::cout << "This Person already exists!\n";
+            return;
+        }
+    }
     students_.push_back(ptr);
 }
 

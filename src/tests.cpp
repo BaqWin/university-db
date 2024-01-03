@@ -43,7 +43,7 @@ struct DatabaseTest : ::testing::Test {
         "Aleksandra",
         "Daniel",
         "ul. Dobra 134, 00-200 Warszawa",
-        "11223344567",
+        "55030101231",
         Gender::Female,
         7000
     );
@@ -81,10 +81,9 @@ TEST_F(DatabaseTest, DisplayNonEmptyDb) {
     db.add(janusz);
     db.add(aleksandra);
     db.add(aleksandra);
-    //check adding the same person twice
     
     auto content = db.show();
-    auto expected = "Adam Kowalski; ul. Dobra 134, 00-200 Warszawa; 123456; 11223344567; Male\nJanusz Tracz; ul. Dobra 134, 00-200 Warszawa; 123457; 11223344565; Male\nAleksandra Daniel; ul. Dobra 134, 00-200 Warszawa; 11223344567; Female; 7000\n";
+    auto expected = "Adam Kowalski; ul. Dobra 134, 00-200 Warszawa; 123456; 11223344567; Male\nJanusz Tracz; ul. Dobra 134, 00-200 Warszawa; 123457; 11223344565; Male\nAleksandra Daniel; ul. Dobra 134, 00-200 Warszawa; 55030101231; Female; 7000\n";
     EXPECT_EQ(content, expected);
 }
 
