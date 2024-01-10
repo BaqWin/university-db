@@ -6,8 +6,7 @@
 
 class Database {
 public:
-    void add(const std::shared_ptr<Person>& ptr);
-    void display() const;
+    std::string add(const std::shared_ptr<Person>& ptr);
     std::string show() const;
     std::string findByName(const std::string& name);
     std::shared_ptr<Person> findByPesel(const std::string& pesel);
@@ -16,7 +15,7 @@ public:
     std::string removeByIndexNumber(const int& index);
     bool peselValidation(const std::shared_ptr<Person>& ptr) const;
     void sortBySalary();
-    void findByPeselAndChangeSalary(const std::string& pesel, const int& salary);
+    std::string findByPeselAndChangeSalary(const std::string& pesel, const int& salary);
 
 private:
     std::vector<std::shared_ptr<Person>> students_;

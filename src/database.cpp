@@ -1,20 +1,15 @@
 #include "database.hpp"
-#include <iostream>
 #include <array>
 #include <algorithm>
 
-void Database::add(const std::shared_ptr<Person>& ptr) {
+std::string Database::add(const std::shared_ptr<Person>& ptr) {
     for(auto x : students_){
         if(x->getPesel() == ptr->getPesel()){
-            std::cout << "This Person already exists!\n";
-            return;
+            return "This Person already exists!\n";
         }
     }
     students_.push_back(ptr);
-}
-
-void Database::display() const {
-    std::cout << show();
+    return "Person added";
 }
 
 std::string Database::show() const{
@@ -40,7 +35,7 @@ std::shared_ptr<Person> Database::findByPesel(const std::string& pesel){
             return ptr;
         }
     }
-    //Throw exception
+    return nullptr;
 }
 
 void Database::sortByPesel(){
@@ -93,13 +88,13 @@ void Database::sortBySalary(){
     });
 }
 
-void Database::findByPeselAndChangeSalary(const std::string& pesel, const int& salary){
+std::string Database::findByPeselAndChangeSalary(const std::string& pesel, const int& salary){
     auto ptr = std::dynamic_pointer_cast<Employee>(findByPesel(pesel));
     if(ptr != NULL){
         ptr->setSalary(salary);
-        std::cout << "Salary changed!\n";
+        return "Salary changed!\n";
     }else{
-        std::cout << "Person not found\n";
+        return "Person not found\n";
     }
 }
 

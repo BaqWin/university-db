@@ -235,7 +235,6 @@ TEST_F(DatabaseTest, CheckSortingBySalary){
     db.add(marcin);
     
     db.sortBySalary();
-    db.display();
     auto content = db.show();
     auto expected = "Marcin Tracz; ul. Dobra 134, 00-200 Warszawa; 11223344590; Male; 7000\nAleksandra Daniel; ul. Dobra 134, 00-200 Warszawa; 55030101231; Female; 8500\nJanusz Tracz; ul. Dobra 134, 00-200 Warszawa; 123457; 11223344565; Male\nAdam Kowalski; ul. Dobra 134, 00-200 Warszawa; 123456; 11223344567; Male\n";
     EXPECT_EQ(content, expected);

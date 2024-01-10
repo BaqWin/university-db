@@ -60,26 +60,21 @@ int main(){
     db.add(ptr3);
     db.add(ptr4);
     db.add(ptr5);
-    db.display();
     std::cout << "--------------------------------------------------------------\n";
     std::cout << db.findByName(ptr1->getLastName()) << std::endl;
     std::cout << db.findByPesel(ptr2->getPesel())->show() << std::endl;
     std::cout << "--------------------------------------------------------------\n";
     db.sortByPesel();
-    db.display();
     std::cout << "--------------------------------------------------------------\n";
     db.sortByLastName();
-    db.display();
     std::cout << "--------------------------------------------------------------\n";
     std::cout << ptr1->getIndexNumber() << std::endl;
     std::cout << db.removeByIndexNumber(ptr1->getIndexNumber()) << std::endl;
-    db.display();
     std::cout << "--------------------------------------------------------------\n";
     db.add(aleksandra);
     db.sortBySalary();
-    db.display();
     //TODO Birth Date validation
     //TODO Saving to binary file
     //TODO Program loop
-    //TODO Random generated data for database
+    //TODO REFORMAT CODE AND UNIT TEST!!
 }
