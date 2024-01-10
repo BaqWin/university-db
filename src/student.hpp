@@ -10,12 +10,15 @@ public:
         int indexNumber,
         std::string pesel,
         Gender gender);
+    ~Student() override;
+
     std::string show() const override;
     std::string getLastName() const override;
     std::string getPesel() const override;
     int getIndexNumber() const;
     Gender getGender() const override;
-    ~Student() override;
+    void serialize(std::ostream& out) const override;
+    void deserialize(std::istream& in) override;
 
 private:
     using Person::Person;

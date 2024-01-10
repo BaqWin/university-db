@@ -25,3 +25,23 @@ int Employee::getSalary() const {
 void Employee::setSalary(const int& salary) {
     salary_ = salary;
 }
+
+void Employee::serialize(std::ostream& out) const{
+    serializeString(name_, out);
+    serializeString(lastName_, out);
+    serializeString(address_, out);
+    serializeString(pesel_, out);
+    serializeString(getGenderString(), out);
+    out.write(reinterpret_cast<const char*>(&salary_), sizeof(salary_));
+}
+
+void Employee::deserialize(std::istream& in){
+    deserializeString(name_, in);
+    deserializeString(lastName_, in);
+    deserializeString(address_, in);
+    deserializeString(pesel_, in);
+    std::string gender;
+    deserializeString(gender, in);
+    setGenderFromString(gender);
+    in.read(reinterpret_cast<char*>(&salary_), sizeof(salary_));
+}

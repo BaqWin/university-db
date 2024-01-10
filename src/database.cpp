@@ -65,7 +65,6 @@ std::string Database::removeByIndexNumber(const int& indexNumber) {
 }
 
 bool Database::peselValidation(const std::shared_ptr<Person>& ptr) const {
-    // TODO Birth Date validation
     auto peselString = ptr->getPesel();
     if (peselString.length() == 11 && checkPeselString(peselString)) {
         if ((int(peselString.at(9)) % 2) == 0 && ptr->getGender() == Gender::Female) {

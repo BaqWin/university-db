@@ -67,8 +67,6 @@ int main() {
     std::cout << "--------------------------------------------------------------\n";
     db.add(aleksandra);
     db.sortBySalary();
-    // TODO Birth Date validation
     // TODO Saving to binary file
     // TODO Program loop
-    // TODO REFORMAT CODE AND UNIT TEST!!
 }

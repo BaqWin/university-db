@@ -24,3 +24,23 @@ Gender Student::getGender() const {
 }
 
 Student::~Student() {}
+
+void Student::serialize(std::ostream& out) const{
+    serializeString(name_, out);
+    serializeString(lastName_, out);
+    serializeString(address_, out);
+    serializeString(pesel_, out);
+    serializeString(getGenderString(), out);
+    out.write(reinterpret_cast<const char*>(&indexNumber_), sizeof(indexNumber_));
+}
+
+void Student::deserialize(std::istream& in){
+    deserializeString(name_, in);
+    deserializeString(lastName_, in);
+    deserializeString(address_, in);
+    deserializeString(pesel_, in);
+    std::string gender;
+    deserializeString(gender, in);
+    setGenderFromString(gender);
+    in.read(reinterpret_cast<char*>(&indexNumber_), sizeof(indexNumber_));
+}

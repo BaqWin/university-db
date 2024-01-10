@@ -18,6 +18,8 @@ public:
     Gender getGender() const override;
     int getSalary() const;
     void setSalary(const int& salary);
+    void serialize(std::ostream& out) const override;
+    void deserialize(std::istream& in) override;
 
 private:
     int salary_;
