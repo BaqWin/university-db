@@ -1,7 +1,7 @@
 #pragma once
 #include "person.hpp"
 
-class Employee : public Person{
+class Employee : public Person {
 public:
     Employee(
         std::string name,
@@ -9,8 +9,7 @@ public:
         std::string address,
         std::string pesel,
         Gender gender,
-        int salary
-    );
+        int salary);
     ~Employee() override;
 
     std::string show() const override;
@@ -19,6 +18,7 @@ public:
     Gender getGender() const override;
     int getSalary() const;
     void setSalary(const int& salary);
+
 private:
     int salary_;
 };

@@ -1,7 +1,7 @@
 #pragma once
 #include "person.hpp"
 
-class Student : public Person{
+class Student : public Person {
 public:
     Student(
         std::string name,
@@ -9,8 +9,7 @@ public:
         std::string address,
         int indexNumber,
         std::string pesel,
-        Gender gender
-    );
+        Gender gender);
     std::string show() const override;
     std::string getLastName() const override;
     std::string getPesel() const override;
