@@ -54,7 +54,7 @@ void Database::sortByLastName() {
 std::string Database::removeByIndexNumber(const int& indexNumber) {
     auto it = std::find_if(people_.begin(), people_.end(), [&](const auto& s) {
         auto ptr = std::dynamic_pointer_cast<Student>(s);
-        return (ptr->getIndexNumber() == indexNumber);
+        return ptr && (ptr->getIndexNumber() == indexNumber);
     });
 
     if (it != people_.end()) {

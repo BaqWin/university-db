@@ -81,6 +81,8 @@ void start() {
     std::ofstream outFile;
     std::ifstream inFile;
     std::string temp;
+    std::shared_ptr<Person> ptr;
+    int index;
 
     bool loop = true;
     while (loop) {
@@ -105,9 +107,32 @@ void start() {
                 addService(db);
                 break;
             case 3:
-                std::cout << "Type Last Name you want to find:";
+                std::cout << "Type Last Name of a person you want to find:";
                 std::cin >> temp;
                 std::cout << db.findByName(temp) << '\n';
+                break;
+            case 4:
+                std::cout << "Type PESEL of a person you want to find:";
+                std::cin >> temp;
+                ptr = db.findByPesel(temp);
+                if(ptr){
+                    std::cout << ptr->show() << '\n';
+                }else{
+                    std::cout << "\033[1;31mWrong PESEL number!\033[0m\n";
+                }
+                break;
+            case 5:
+                db.sortByPesel();
+                std::cout << "Database sorted by PESEL!\n";
+                break;
+            case 6:
+                db.sortByLastName();
+                std::cout << "Database sorted by Last Name!\n";
+                break;
+            case 7:
+                std::cout << "Type Index Number of a person you want to delete:";
+                std::cin >> index;
+                std::cout << db.removeByIndexNumber(index) << '\n';
                 break;
             case 8:
                 outFile.open("database.bin", std::ios::binary);
@@ -130,6 +155,5 @@ void start() {
 
 int main() {
     start();
-    // TODO Program loop
     // TODO zrobic typ danych dla adresu
 }
