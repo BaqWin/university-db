@@ -9,8 +9,12 @@ std::string Database::add(const std::shared_ptr<Person>& ptr) {
             return "This Person already exists!\n";
         }
     }
-    people_.push_back(ptr);
-    return "Person added";
+    if(peselValidation(ptr)){
+        people_.push_back(ptr);
+        return "Person added";
+    }else{
+        return "Wrong pesel validation!";
+    }
 }
 
 std::string Database::show() const {
