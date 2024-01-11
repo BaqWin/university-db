@@ -4,25 +4,25 @@
 #include <utility>
 
 std::string Database::add(const std::shared_ptr<Person>& ptr) {
-    for (auto x : students_) {
+    for (auto x : people_) {
         if (x->getPesel() == ptr->getPesel()) {
             return "This Person already exists!\n";
         }
     }
-    students_.push_back(ptr);
+    people_.push_back(ptr);
     return "Person added";
 }
 
 std::string Database::show() const {
     std::string result = "";
-    for (auto&& ptr : students_) {
+    for (auto&& ptr : people_) {
         result += ptr->show() + "\n";
     }
     return result;
 }
 
 std::string Database::findByName(const std::string& name) {
-    for (auto ptr : students_) {
+    for (auto ptr : people_) {
         if (ptr->getLastName() == name) {
             return ptr->show();
         }
@@ -31,7 +31,7 @@ std::string Database::findByName(const std::string& name) {
 }
 
 std::shared_ptr<Person> Database::findByPesel(const std::string& pesel) {
-    for (auto ptr : students_) {
+    for (auto ptr : people_) {
         if (ptr->getPesel() == pesel) {
             return ptr;
         }
@@ -40,25 +40,25 @@ std::shared_ptr<Person> Database::findByPesel(const std::string& pesel) {
 }
 
 void Database::sortByPesel() {
-    std::sort(students_.begin(), students_.end(), [](const auto& s1, const auto& s2) {
+    std::sort(people_.begin(), people_.end(), [](const auto& s1, const auto& s2) {
         return (std::stol(s1->getPesel()) < std::stol(s2->getPesel()));
     });
 }
 
 void Database::sortByLastName() {
-    std::sort(students_.begin(), students_.end(), [](const auto& s1, const auto& s2) {
+    std::sort(people_.begin(), people_.end(), [](const auto& s1, const auto& s2) {
         return (s1->getLastName() < s2->getLastName());
     });
 }
 
 std::string Database::removeByIndexNumber(const int& indexNumber) {
-    auto it = std::find_if(students_.begin(), students_.end(), [&](const auto& s) {
+    auto it = std::find_if(people_.begin(), people_.end(), [&](const auto& s) {
         auto ptr = std::dynamic_pointer_cast<Student>(s);
         return (ptr->getIndexNumber() == indexNumber);
     });
 
-    if (it != students_.end()) {
-        students_.erase(it);
+    if (it != people_.end()) {
+        people_.erase(it);
         return "Student deleted!";
     } else {
         return "There is no student with this index number";
@@ -78,7 +78,7 @@ bool Database::peselValidation(const std::shared_ptr<Person>& ptr) const {
 }
 
 void Database::sortBySalary() {
-    std::sort(students_.begin(), students_.end(), [](const auto& s1, const auto& s2) {
+    std::sort(people_.begin(), people_.end(), [](const auto& s1, const auto& s2) {
         auto ptr1 = std::dynamic_pointer_cast<Employee>(s1);
         auto ptr2 = std::dynamic_pointer_cast<Employee>(s2);
         if (ptr1 != NULL && ptr2 != NULL) {
@@ -131,11 +131,10 @@ bool Database::checkPeselString(const std::string& pesel) const {
 }
 
 void Database::serialize(std::ostream& out) {
-    for (const auto& obj : students_) {
+    for (const auto& obj : people_) {
         std::string typeName = reverseTypeMap[obj->getType()];
         size_t typeNameLength = typeName.size();
         out.write(reinterpret_cast<const char*>(&typeNameLength), sizeof(typeNameLength));
-        std::cout << typeName.data();
         out.write(typeName.data(), typeNameLength);
         obj->serialize(out);
     }

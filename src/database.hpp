@@ -30,7 +30,7 @@ public:
     }
 
 private:
-    std::vector<std::shared_ptr<Person>> students_;
+    std::vector<std::shared_ptr<Person>> people_;
     bool lastNumberAlgorithm(const std::string& pesel) const;
     bool checkPeselString(const std::string& pesel) const;
     std::map<std::string, std::unique_ptr<Person>(*)()> typeMap;
