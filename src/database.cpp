@@ -135,6 +135,7 @@ void Database::serialize(std::ostream& out) {
         std::string typeName = reverseTypeMap[obj->getType()];
         size_t typeNameLength = typeName.size();
         out.write(reinterpret_cast<const char*>(&typeNameLength), sizeof(typeNameLength));
+        std::cout << typeName.data();
         out.write(typeName.data(), typeNameLength);
         obj->serialize(out);
     }
@@ -149,7 +150,6 @@ void Database::deserialize(std::istream& in) {
         }
         std::string typeName(typeNameLength, '\0');
         in.read(&typeName[0], typeNameLength);
-        std::cout << typeName;
 
         auto it = typeMap.find(typeName);
         if(it == typeMap.end()) {
@@ -157,8 +157,9 @@ void Database::deserialize(std::istream& in) {
         }
 
         std::unique_ptr<Person> obj = it->second();
-        obj->deserialize(in);
-
-        add(std::shared_ptr<Person>(std::move(obj)));
+        if (obj) {
+            obj->deserialize(in);
+            add(std::shared_ptr<Person>(std::move(obj)));
+        }
     }
 }

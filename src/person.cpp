@@ -20,11 +20,17 @@ void Person::serializeString(const std::string& str, std::ostream& out) const{
     out.write(reinterpret_cast<const char*>(&length), sizeof(length));
     out.write(str.data(), length);
 }
-
-void Person::deserializeString(std::string& str, std::istream& in){
+void Person::deserializeString(std::string& str, std::istream& in) {
     size_t length;
-    in.read(reinterpret_cast<char*>(&length), sizeof(length));
-    in.read(&str[0], length);
+    if (in.read(reinterpret_cast<char*>(&length), sizeof(length))) {
+        str.resize(length);
+        if (length > 0) {
+            in.read(&str[0], length);
+        }
+    }
+    if (!in) {
+        return;
+    }
 }
 
 void Person::setGenderFromString(const std::string& gender){
