@@ -5,8 +5,69 @@
 #include "person.hpp"
 #include "student.hpp"
 
-int main() {
+void showInfo(){
+    std::cout << "Type: 1 - To Show the Database\n"
+    << "Type: 2 - To add new Person to the Database\n"
+    << "Type: 3 - To search for a student by his Last Name\n"
+    << "Type: 4 - To search for a student by his PESEL\n"
+    << "Type: 5 - To sort Database by PESEL\n"
+    << "Type: 6 - To sort Database by Last Name\n"
+    << "Type: 7 - Delete user by his Index Number\n"
+    << "Type: 8 - To Save state of Database\n"
+    << "Type: 9 - To Save state of Database\n"
+    << "Type: 0 - To leave the application\n"
+    << "-------------------------------------------------------\n";
+}
+
+void addService(){
+    int n = -1;
+    std::cout << "Type a number of a person you want to add to the Database:\n"
+    << "Type: 1 - To add new Student\n"
+    << "Type: 2 - To Show new Employee\n";
+    std::cin >> n;
+    if(n == 1){
+        std::cout << "Adding Student\n";
+    }else if(n == 2){
+        std::cout << "Adding Employee\n";
+    }else{
+        std::cout << "\033[1;31mWrong number!\033[0m\n";
+        return;
+    }
+}
+
+void start(){
     Database db;
+    bool loop = true;
+    while (loop){
+        int n = -1;
+        showInfo();
+        std::cout << "Type a number to a corresponding action:";
+        std::cin >> n;
+        if (std::cin.fail()) {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "\033[1;31mInvalid input. Please provide a number.\033[0m\n";
+        } else if(n < 10 && n >= 0){
+            switch(n){
+                case 0:
+                    std::cout << "Thank you for checking the app :)\n";
+                    loop = false;
+                    break;
+                case 1:
+                    std::cout << db.show() << std::endl;
+                    break;
+                case 2:
+                    addService();
+                    break;
+            }
+        }else{
+            std::cout << "\033[1;31mPlease provide numbers between 0-10\033[0m\n";
+        }
+    }
+}
+
+int main() {
+    start();
 
     // auto ptr1 = std::make_shared<Student>(
     //     "Adam",
@@ -70,17 +131,18 @@ int main() {
     // db.add(aleksandra);
     // db.sortBySalary();
 
-    std::cout << db.show();
-    db.registerType<Employee>("Employee");
-    db.registerType<Student>("Student");
-    // std::ofstream outFile("database.bin", std::ios::binary);
-    // db.serialize(outFile);
-    // outFile.close();
-    std::ifstream inFile("database.bin", std::ios::binary);
-    db.deserialize(inFile);
-    inFile.close();
-    std::cout << db.show();
+    // std::cout << db.show();
+    // db.registerType<Employee>("Employee");
+    // db.registerType<Student>("Student");
+    // // std::ofstream outFile("database.bin", std::ios::binary);
+    // // db.serialize(outFile);
+    // // outFile.close();
+    // std::ifstream inFile("database.bin", std::ios::binary);
+    // db.deserialize(inFile);
+    // inFile.close();
+    // std::cout << db.show();
 
 
     // TODO Program loop
+    //TODO zrobic typ danych dla adresu
 }
