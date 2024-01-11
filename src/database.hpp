@@ -1,8 +1,8 @@
 #pragma once
-#include <memory>
-#include <vector>
 #include <iostream>
 #include <map>
+#include <memory>
+#include <vector>
 #include "employee.hpp"
 #include "student.hpp"
 
@@ -19,10 +19,10 @@ public:
     void sortBySalary();
     std::string findByPeselAndChangeSalary(const std::string& pesel, const int& salary);
     void serialize(std::ostream& out);
-    void deserialize(std:: istream& in);
+    void deserialize(std::istream& in);
 
-    template<typename T>
-    void registerType(const std::string& typeName){
+    template <typename T>
+    void registerType(const std::string& typeName) {
         typeMap[typeName] = []() -> std::unique_ptr<Person> {
             return std::make_unique<T>();
         };
@@ -33,6 +33,6 @@ private:
     std::vector<std::shared_ptr<Person>> people_;
     bool lastNumberAlgorithm(const std::string& pesel) const;
     bool checkPeselString(const std::string& pesel) const;
-    std::map<std::string, std::unique_ptr<Person>(*)()> typeMap;
+    std::map<std::string, std::unique_ptr<Person> (*)()> typeMap;
     std::map<std::type_index, std::string> reverseTypeMap;
 };

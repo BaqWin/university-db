@@ -44,7 +44,7 @@ void addService(Database& db) {
     std::cin >> address;
     std::cout << "Type PESEL (11 Numbers):";
     std::cin >> pesel;
-    if(pesel.length() != 11){
+    if (pesel.length() != 11) {
         std::cout << "\033[1;31mWrong PESEL number!\033[0m\n";
         return;
     }
@@ -54,7 +54,7 @@ void addService(Database& db) {
         genderType = Gender::Male;
     } else if (gender == "Female") {
         genderType = Gender::Female;
-    }else {
+    } else {
         std::cout << "\033[1;31mWrong gender!\033[0m\n";
         return;
     }
@@ -63,13 +63,13 @@ void addService(Database& db) {
         std::cout << "Type Index Number:";
         std::cin >> index;
         std::cout << db.add(std::make_shared<Student>(name, lastName, address, index, pesel, genderType))
-        << '\n';
+                  << '\n';
     } else if (n == 2) {
         int salary;
         std::cout << "Type Salary:";
         std::cin >> salary;
         std::cout << db.add(std::make_shared<Employee>(name, lastName, address, pesel, genderType, salary))
-        << '\n';
+                  << '\n';
     }
 }
 
@@ -101,7 +101,8 @@ void start() {
                 loop = false;
                 break;
             case 1:
-                std::cout << '\n' << db.show() << std::endl;
+                std::cout << '\n'
+                          << db.show() << std::endl;
                 break;
             case 2:
                 addService(db);
@@ -115,9 +116,9 @@ void start() {
                 std::cout << "Type PESEL of a person you want to find:";
                 std::cin >> temp;
                 ptr = db.findByPesel(temp);
-                if(ptr){
+                if (ptr) {
                     std::cout << ptr->show() << '\n';
-                }else{
+                } else {
                     std::cout << "\033[1;31mWrong PESEL number!\033[0m\n";
                 }
                 break;

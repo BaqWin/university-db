@@ -27,7 +27,7 @@ Gender Student::getGender() const {
 
 Student::~Student() {}
 
-void Student::serialize(std::ostream& out) const{
+void Student::serialize(std::ostream& out) const {
     serializeString(name_, out);
     serializeString(lastName_, out);
     serializeString(address_, out);
@@ -36,7 +36,7 @@ void Student::serialize(std::ostream& out) const{
     out.write(reinterpret_cast<const char*>(&indexNumber_), sizeof(indexNumber_));
 }
 
-void Student::deserialize(std::istream& in){
+void Student::deserialize(std::istream& in) {
     deserializeString(name_, in);
     deserializeString(lastName_, in);
     deserializeString(address_, in);
@@ -47,6 +47,6 @@ void Student::deserialize(std::istream& in){
     in.read(reinterpret_cast<char*>(&indexNumber_), sizeof(indexNumber_));
 }
 
-std::type_index Student::getType() const{
+std::type_index Student::getType() const {
     return typeid(*this);
 }

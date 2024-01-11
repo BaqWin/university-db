@@ -28,7 +28,7 @@ void Employee::setSalary(const int& salary) {
     salary_ = salary;
 }
 
-void Employee::serialize(std::ostream& out) const{
+void Employee::serialize(std::ostream& out) const {
     serializeString(name_, out);
     serializeString(lastName_, out);
     serializeString(address_, out);
@@ -37,7 +37,7 @@ void Employee::serialize(std::ostream& out) const{
     out.write(reinterpret_cast<const char*>(&salary_), sizeof(salary_));
 }
 
-void Employee::deserialize(std::istream& in){
+void Employee::deserialize(std::istream& in) {
     deserializeString(name_, in);
     deserializeString(lastName_, in);
     deserializeString(address_, in);
@@ -48,6 +48,6 @@ void Employee::deserialize(std::istream& in){
     in.read(reinterpret_cast<char*>(&salary_), sizeof(salary_));
 }
 
-std::type_index Employee::getType() const{
+std::type_index Employee::getType() const {
     return typeid(*this);
 }

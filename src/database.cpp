@@ -141,17 +141,17 @@ void Database::serialize(std::ostream& out) {
 }
 
 void Database::deserialize(std::istream& in) {
-    while(in){
+    while (in) {
         size_t typeNameLength;
         in.read(reinterpret_cast<char*>(&typeNameLength), sizeof(typeNameLength));
-        if(!in){
+        if (!in) {
             break;
         }
         std::string typeName(typeNameLength, '\0');
         in.read(&typeName[0], typeNameLength);
 
         auto it = typeMap.find(typeName);
-        if(it == typeMap.end()) {
+        if (it == typeMap.end()) {
             break;
         }
 
