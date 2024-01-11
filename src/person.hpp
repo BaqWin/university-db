@@ -2,6 +2,7 @@
 #include <map>
 #include <string>
 #include <iostream>
+#include <typeindex>
 
 enum class Gender {
     Male,
@@ -10,6 +11,7 @@ enum class Gender {
 
 class Person {
 public:
+    Person();
     Person(
         std::string name,
         std::string lastName,
@@ -27,6 +29,7 @@ public:
     void serializeString(const std::string& str, std::ostream& out) const;
     void deserializeString(std::string& str, std::istream& in);
     void setGenderFromString(const std::string& gender);
+    virtual std::type_index getType() const = 0;
 
 protected:
     std::string name_;

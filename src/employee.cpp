@@ -1,5 +1,7 @@
 #include "employee.hpp"
 
+Employee::Employee() {}
+
 Employee::Employee(std::string name, std::string lastName, std::string address, std::string pesel, Gender gender, int salary)
     : Person(name, lastName, address, pesel, gender), salary_(salary) {}
 
@@ -44,4 +46,8 @@ void Employee::deserialize(std::istream& in){
     deserializeString(gender, in);
     setGenderFromString(gender);
     in.read(reinterpret_cast<char*>(&salary_), sizeof(salary_));
+}
+
+std::type_index Employee::getType() const{
+    return typeid(*this);
 }

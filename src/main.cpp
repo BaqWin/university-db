@@ -1,11 +1,13 @@
 #include <iostream>
 #include <memory>
+#include <fstream>
 #include "database.hpp"
 #include "person.hpp"
 #include "student.hpp"
 
 int main() {
     Database db;
+
     auto ptr1 = std::make_shared<Student>(
         "Adam",
         "Kowalski",
@@ -67,6 +69,17 @@ int main() {
     std::cout << "--------------------------------------------------------------\n";
     db.add(aleksandra);
     db.sortBySalary();
-    // TODO Saving to binary file
+
+    // db.registerType<Employee>("Employee");
+    // db.registerType<Student>("Student");
+    // std::ofstream outFile("database.bin", std::ios::binary);
+    // db.serialize(outFile);
+    // outFile.close();
+    // std::ifstream inFile("database.bin", std::ios::binary);
+    // db.deserialize(inFile);
+    // inFile.close();
+    // std::cout << db.show();
+
+
     // TODO Program loop
 }

@@ -1,5 +1,7 @@
 #include "student.hpp"
 
+Student::Student() {}
+
 Student::Student(std::string name, std::string lastName, std::string address, int indexNumber, std::string pesel, Gender gender)
     : Person(name, lastName, address, pesel, gender), indexNumber_(indexNumber) {}
 
@@ -43,4 +45,8 @@ void Student::deserialize(std::istream& in){
     deserializeString(gender, in);
     setGenderFromString(gender);
     in.read(reinterpret_cast<char*>(&indexNumber_), sizeof(indexNumber_));
+}
+
+std::type_index Student::getType() const{
+    return typeid(*this);
 }

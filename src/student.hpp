@@ -3,6 +3,7 @@
 
 class Student : public Person {
 public:
+    Student();
     Student(
         std::string name,
         std::string lastName,
@@ -19,6 +20,7 @@ public:
     Gender getGender() const override;
     void serialize(std::ostream& out) const override;
     void deserialize(std::istream& in) override;
+    std::type_index getType() const override;
 
 private:
     using Person::Person;

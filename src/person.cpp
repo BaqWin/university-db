@@ -1,5 +1,7 @@
 #include "person.hpp"
 
+Person::Person() {}
+
 Person::Person(std::string name, std::string lastName, std::string address, std::string pesel, Gender gender)
     : name_(name), lastName_(lastName), address_(address), pesel_(pesel), gender_(gender) {}
 
@@ -27,8 +29,8 @@ void Person::deserializeString(std::string& str, std::istream& in){
 
 void Person::setGenderFromString(const std::string& gender){
     if(gender == "Male"){
-        gender_ == Gender::Male;
+        gender_ = Gender::Male;
     }else if(gender == "Female"){
-        gender_ == Gender::Female;
+        gender_ = Gender::Female;
     }
 }
